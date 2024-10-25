@@ -1,8 +1,14 @@
-import { useEncrypt } from '../hooks/useEncrypt';
-import { useStorage } from '../hooks/useStorage';
+import { useEffect } from 'react';
+import { useAuth } from '../hooks/useAuth';
 
 export const ProfilePage = () => {
-	const { encrypted } = useStorage();
-	console.log(encrypted);
+	const { userSession } = useAuth();
+
+	useEffect(() => {
+		if (userSession) {
+			console.log('Sesión de usuario:', userSession);
+		}
+	}, [userSession]);
+
 	return <div>ProfilePage</div>;
 };

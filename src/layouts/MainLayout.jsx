@@ -1,92 +1,88 @@
 import React from 'react';
-import {
-	LaptopOutlined,
-	NotificationOutlined,
-	UserOutlined,
-} from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 const { Header, Content, Footer, Sider } = Layout;
 
-const items1 = ['1', '2', '3'].map((key) => ({
-	key,
-	label: `nav ${key}`,
-}));
-
-const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
-	(icon, index) => {
-		const key = String(index + 1);
-		return {
-			key: `sub${key}`,
-			icon: React.createElement(icon),
-			label: `subnav ${key}`,
-			children: new Array(4).fill(null).map((_, j) => {
-				const subKey = index * 4 + j + 1;
-				return {
-					key: subKey,
-					label: `option${subKey}`,
-				};
-			}),
-		};
-	}
-);
+const items = [
+	{ title: <Link to="/">Home</Link> },
+	{ title: <Link to="/list">List</Link> },
+	{ title: <Link to="/app">App</Link> },
+];
 
 export const MainLayout = () => {
-	const {
-		token: { colorBgContainer, borderRadiusLG },
-	} = theme.useToken();
+	const items1 = [
+		{ label: <Link to="/login">Login</Link>, key: 'login' },
+		{ label: <Link to="/register">Register</Link>, key: 'register' },
+		{ label: <Link to="/profile">Profile</Link>, key: 'profile' },
+	];
+
+	const items2 = [
+		{ label: 'Filter 1', key: '1' },
+		{ label: 'Filter 2', key: '2' },
+		{ label: 'Filter 3', key: '3' },
+	];
+
+	const logoStyle = {
+		display: 'flex',
+		alignItems: 'center',
+		marginRight: 'auto', // Alinea el logo a la izquierda
+	};
+
 	return (
 		<Layout className="min-h-screen">
 			<Header
 				style={{
 					display: 'flex',
 					alignItems: 'center',
+					justifyContent: 'space-between', // Alinea elementos en extremos
 				}}
 			>
-				<div className="demo-logo" />
+				<div style={logoStyle}>
+					{/* Reemplaza esto con tu logo */}
+					<img
+						src="/path/to/logo.png"
+						alt="Logo"
+						style={{ height: 40 }}
+					/>
+				</div>
 				<Menu
 					theme="dark"
 					mode="horizontal"
-					defaultSelectedKeys={['2']}
 					items={items1}
 					style={{
 						flex: 1,
-						minWidth: 0,
+						justifyContent: 'flex-end', // Alinea los enlaces a la derecha
 					}}
 				/>
 			</Header>
 			<Content
 				style={{
 					padding: '0 48px',
+					minHeight: '100vh', // Asegura que el contenido tenga una altura mínima del 100%
 				}}
 			>
 				<Breadcrumb
 					style={{
 						margin: '16px 0',
 					}}
-				>
-					<Breadcrumb.Item>Home</Breadcrumb.Item>
-					<Breadcrumb.Item>List</Breadcrumb.Item>
-					<Breadcrumb.Item>App</Breadcrumb.Item>
-				</Breadcrumb>
+					items={items}
+				/>
 				<Layout
 					style={{
 						padding: '24px 0',
-						background: colorBgContainer,
-						borderRadius: borderRadiusLG,
+						background: '#f0f2f5', // Cambia esto por el color que prefieras
 					}}
 				>
 					<Sider
 						style={{
-							background: colorBgContainer,
+							background: '#ffffff', // Color de fondo del sider
 						}}
 						width={200}
 					>
 						<Menu
 							mode="inline"
 							defaultSelectedKeys={['1']}
-							defaultOpenKeys={['sub1']}
 							style={{
 								height: '100%',
 							}}
@@ -96,7 +92,9 @@ export const MainLayout = () => {
 					<Content
 						style={{
 							padding: '0 24px',
-							minHeight: 280,
+							minHeight: 100, // Asegura que el contenido tenga una altura mínima de 100
+							background: '#ffffff', // Fondo del contenido principal
+							borderRadius: '8px', // Bordes redondeados
 						}}
 					>
 						<Outlet />
@@ -106,9 +104,35 @@ export const MainLayout = () => {
 			<Footer
 				style={{
 					textAlign: 'center',
+					backgroundColor: '#001529', // Cambia el color del fondo del footer
+					color: 'white', // Color del texto
+					padding: '24px 0', // Añadir padding para un mejor espaciado
+					fontSize: '14px', // Ajustar tamaño de fuente
 				}}
 			>
-				Ant Design ©{new Date().getFullYear()} Created by Ant UED
+				<div style={{ marginBottom: '8px' }}>
+					Ant Design ©{new Date().getFullYear()} Created by Ant UED
+				</div>
+				<div>
+					<a
+						href="/"
+						style={{ color: 'white', marginRight: '15px' }}
+					>
+						Home
+					</a>
+					<a
+						href="/"
+						style={{ color: 'white', marginRight: '15px' }}
+					>
+						About Us
+					</a>
+					<a
+						href="/"
+						style={{ color: 'white' }}
+					>
+						Contact
+					</a>
+				</div>
 			</Footer>
 		</Layout>
 	);

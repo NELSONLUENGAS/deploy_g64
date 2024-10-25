@@ -5,7 +5,6 @@ import { useStorage } from '../hooks/useStorage';
 
 export const LoginForm = () => {
 	const { handleSession } = useAuth();
-	const { handleSetStorageSession } = useStorage();
 	const navigate = useNavigate();
 
 	const [login, setLogin] = useState({
@@ -22,17 +21,18 @@ export const LoginForm = () => {
 				token: true,
 				id: Math.ceil(Math.random(100 * 1)),
 			};
-			handleSetStorageSession(newState);
 			return newState;
 		});
 
 		setTimeout(() => {
-			navigate(`/profile/${login.email}`);
+			navigate(`/profile`);
 		}, 1000);
 	};
 
 	useEffect(() => {
-		handleSession(login);
+		if (login.email && login.password) {
+			handleSession(login);
+		}
 	}, [login]);
 
 	const handleOnChange = (event) => {

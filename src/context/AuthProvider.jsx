@@ -1,24 +1,36 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
+import { useStorage } from '../hooks/useStorage';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-	const [userSession, setUserSession] = useState({
-		token: false,
-		username: '',
-		email: '',
-		roles: ['customer', 'admin'],
-	});
+	const { handleGetStorageSession, handleSetStorageSession, decrypted } =
+		useStorage();
+
+	const [userSession, setUserSession] = useState(null);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const handleSession = (session) => {
-		setUserSession({
-			...userSession,
-			...session,
-		});
+		setUserSession(session);
+		handleSetStorageSession(session);
 	};
 
+	useEffect(() => {
+		handleGetStorageSession();
+	}, []);
+
+	useEffect(() => {
+		if (decrypted) {
+			setUserSession(JSON.parse(decrypted));
+		}
+
+		setTimeout(() => {
+			setIsLoading(false);
+		}, 10);
+	}, [decrypted]);
+
 	return (
-		<AuthContext.Provider value={{ userSession, handleSession }}>
+		<AuthContext.Provider value={{ userSession, handleSession, isLoading }}>
 			{children}
 		</AuthContext.Provider>
 	);

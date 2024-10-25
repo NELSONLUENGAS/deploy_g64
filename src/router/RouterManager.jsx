@@ -42,11 +42,11 @@ export const RouterManager = () => {
 					/>
 
 					<Route
-						path="/profile/:user_id"
+						path="/profile"
 						element={
 							<AuthGuard
 								redirectTo="/login"
-								isAllow={userSession.token}
+								isAllow={userSession?.token}
 							/>
 						}
 					>
@@ -61,7 +61,7 @@ export const RouterManager = () => {
 				<Route
 					path="/admin"
 					element={
-						<AuthGuard isAllow={userSession.roles.includes('admin')}>
+						<AuthGuard isAllow={userSession?.roles?.includes('admin')}>
 							<AdminLayout />
 						</AuthGuard>
 					}

@@ -16,9 +16,9 @@ export const useEncrypt = () => {
 		setEncrypted(encrypted);
 	};
 
-	const handleDecrypt = () => {
+	const handleDecrypt = (encryptedData) => {
 		const decrypted = CryptoJs.AES.decrypt(
-			encrypted,
+			encryptedData,
 			String(VITE_CRYPTOJS_SECRET)
 		).toString(CryptoJs.enc.Utf8);
 
