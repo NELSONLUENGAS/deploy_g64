@@ -8,6 +8,7 @@ import { DashboardPage } from '../views/DashboardPage';
 import { ProfilePage } from '../views/ProfilePage';
 import { LoginPage } from '../views/LoginPage';
 import { RegisterPage } from '../views/RegisterPage';
+import { Page404 } from '../views/Page404';
 
 export const RouterManager = () => {
 	const { userSession } = useAuth();
@@ -16,6 +17,11 @@ export const RouterManager = () => {
 		<Router>
 			<Routes>
 				{/* Users Routes */}
+				<Route
+					path="*"
+					element={<Page404 />}
+				/>
+
 				<Route
 					path="/login"
 					element={<LoginPage />}

@@ -4,14 +4,21 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
 	const [userSession, setUserSession] = useState({
-		token: true,
-		username: 'test_123',
-		email: 'test@test.com',
+		token: false,
+		username: '',
+		email: '',
 		roles: ['customer', 'admin'],
 	});
 
+	const handleSession = (session) => {
+		setUserSession({
+			...userSession,
+			...session,
+		});
+	};
+
 	return (
-		<AuthContext.Provider value={{ userSession }}>
+		<AuthContext.Provider value={{ userSession, handleSession }}>
 			{children}
 		</AuthContext.Provider>
 	);

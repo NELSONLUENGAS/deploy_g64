@@ -9,7 +9,7 @@ export const useEncrypt = () => {
 
 	const handleEncrypt = (data) => {
 		const encrypted = CryptoJs.AES.encrypt(
-			data,
+			JSON.stringify(data),
 			String(VITE_CRYPTOJS_SECRET)
 		).toString();
 
