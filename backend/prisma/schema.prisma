@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int       @id @default(autoincrement())
+  email    String    @unique
+  password String
+  role     Role      @default(AUTHOR) // Enum para roles
+  posts    Post[] // Relación uno a muchos
+  comments Comment[] // Relación uno a muchos
+}
+
+model Post {
+  id       Int       @id @default(autoincrement())
+  title    String
+  content  String
+  authorId Int
+  author   User      @relation(fields: [authorId], references: [id], onDelete: Cascade) // Relación muchos a uno
+  tags     Tag[]     @relation("PostTags") // Relación muchos a muchos
+  comments Comment[] // Relación uno a muchos
+}
+
+model Comment {
+  id      Int    @id @default(autoincrement())
+  content String
+  postId  Int
+  userId  Int
+  post    Post   @relation(fields: [postId], references: [id], onDelete: Cascade) // Relación muchos a uno
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade) // Relación muchos a uno
+}
+
+model Tag {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  posts Post[] @relation("PostTags") // Relación muchos a muchos
+}
+
+enum Role {
+  ADMIN // Administrador del blog, con todos los permisos
+  EDITOR // Editor que puede crear y editar publicaciones
+  AUTHOR // Autor que puede crear publicaciones propias
+  CONTRIBUTOR // Contribuyente que puede sugerir contenido
+  SUBSCRIBER // Suscriptor que puede comentar y recibir actualizaciones
+}
+
+// npx prisma migrate dev --name fix-models  (Ejecutar cada )

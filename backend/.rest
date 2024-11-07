@@ -1,0 +1,137 @@
+### Auth Routes
+
+### Registro de usuario
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "usuario@example.com",
+  "password": "password123",
+  "role": "EDITOR",
+   "username": "user_example"
+}
+
+### Inicio de sesión
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "usuario@example.com",
+  "password": "password123"
+}
+
+### User Routes
+
+### Obtener todos los usuarios (requiere autenticación y permisos de EDITOR o ADMIN)
+GET http://localhost:3000/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzMxMDIzMzUxLCJleHAiOjE3MzEwMjY5NTF9.F3oqmQcKTGEUg_tKq_0kVuyUvZoIH0CJqyekzbE9p0I
+
+### Obtener un usuario por ID
+GET http://localhost:3000/api/users/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzMxMDIzMzUxLCJleHAiOjE3MzEwMjY5NTF9.F3oqmQcKTGEUg_tKq_0kVuyUvZoIH0CJqyekzbE9p0I
+
+### Actualizar un usuario (requiere rol ADMIN)
+PUT http://localhost:3000/api/users/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzMxMDIzMzUxLCJleHAiOjE3MzEwMjY5NTF9.F3oqmQcKTGEUg_tKq_0kVuyUvZoIH0CJqyekzbE9p0I
+Content-Type: application/json
+
+{
+  "email": "nuevo_correo@example.com"
+}
+
+### Eliminar un usuario (requiere rol ADMIN)
+DELETE http://localhost:3000/api/users/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzMwNDY3NzU1LCJleHAiOjE3MzA0NzEzNTV9.QPUFRHIgJl_mkeYfk9u9Qo_8voZJVxqijYIfoHuD644
+
+### Post Routes
+
+### Obtener todas las publicaciones
+GET http://localhost:3000/api/posts
+
+### Obtener una publicación por ID
+GET http://localhost:3000/api/posts/1
+
+### Crear una publicación (requiere autenticación y rol de EDITOR, AUTHOR o ADMIN)
+POST http://localhost:3000/api/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzMwNDY3NzU1LCJleHAiOjE3MzA0NzEzNTV9.QPUFRHIgJl_mkeYfk9u9Qo_8voZJVxqijYIfoHuD644
+Content-Type: application/json
+
+{
+  "title": "Nueva Publicación",
+  "content": "Contenido de la publicación.",
+  "userId": 1
+}
+
+### Actualizar una publicación (requiere rol de EDITOR, AUTHOR o ADMIN)
+PUT http://localhost:3000/api/posts/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzMwNDY3NzU1LCJleHAiOjE3MzA0NzEzNTV9.QPUFRHIgJl_mkeYfk9u9Qo_8voZJVxqijYIfoHuD644
+Content-Type: application/json
+
+{
+  "title": "Título Actualizado",
+  "content": "Contenido actualizado."
+}
+
+### Eliminar una publicación (requiere rol de EDITOR, AUTHOR o ADMIN)
+DELETE http://localhost:3000/api/posts/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzMwNDY3NzU1LCJleHAiOjE3MzA0NzEzNTV9.QPUFRHIgJl_mkeYfk9u9Qo_8voZJVxqijYIfoHuD644
+
+### Comment Routes
+
+### Obtener comentarios de una publicación
+GET http://localhost:3000/api/comments/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzMwNDY3NzU1LCJleHAiOjE3MzA0NzEzNTV9.QPUFRHIgJl_mkeYfk9u9Qo_8voZJVxqijYIfoHuD644
+
+### Crear un comentario (requiere rol de EDITOR, AUTHOR o ADMIN)
+POST http://localhost:3000/api/comments
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzMwNDY3NzU1LCJleHAiOjE3MzA0NzEzNTV9.QPUFRHIgJl_mkeYfk9u9Qo_8voZJVxqijYIfoHuD644
+Content-Type: application/json
+
+{
+  "content": "Este es un comentario.",
+  "postId": 1,
+  "userId": 2
+}
+
+### Actualizar un comentario (requiere rol de EDITOR, AUTHOR o ADMIN)
+PUT http://localhost:3000/api/comments/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzMwNDY3NzU1LCJleHAiOjE3MzA0NzEzNTV9.QPUFRHIgJl_mkeYfk9u9Qo_8voZJVxqijYIfoHuD644
+Content-Type: application/json
+
+{
+  "content": "Comentario actualizado."
+}
+
+### Eliminar un comentario (requiere rol de EDITOR, AUTHOR o ADMIN)
+DELETE http://localhost:3000/api/comments/1
+Authorization: Bearer <token>
+
+### Tag Routes
+
+### Obtener todas las etiquetas
+GET http://localhost:3000/api/tags
+
+### Obtener una etiqueta por ID
+GET http://localhost:3000/api/tags/1
+
+### Crear una etiqueta (requiere rol de EDITOR o ADMIN)
+POST http://localhost:3000/api/tags
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "name": "Etiqueta Nueva"
+}
+
+### Actualizar una etiqueta (requiere rol de EDITOR o ADMIN)
+PUT http://localhost:3000/api/tags/1
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "name": "Etiqueta Actualizada"
+}
+
+### Eliminar una etiqueta (requiere rol de EDITOR o ADMIN)
+DELETE http://localhost:3000/api/tags/1
+Authorization: Bearer <token>
