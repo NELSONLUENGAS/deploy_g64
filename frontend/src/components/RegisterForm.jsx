@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+const { VITE_API_URL } = import.meta.env;
 
 export const RegisterForm = () => {
 	const navigate = useNavigate();
 	const { handleSession } = useAuth();
+	const [loading, setLoading] = useState(false);
 
 	const [register, setRegister] = useState({
 		username: '',
@@ -12,11 +14,18 @@ export const RegisterForm = () => {
 		password: '',
 	});
 
-	const handleSumbit = (event) => {
+	const handleSumbit = async (event) => {
 		event.preventDefault();
 
-		handleSession(register);
-		navigate('/login');
+		const newUser = await fetch(`${VITE_API_URL}/api/auth/register`, {
+			method: 'POST',
+			body: JSON.stringify(register),
+		});
+
+		const response = await newUser.json();
+		console.log(response);
+		// const newUser = handleSession(register);
+		// navigate('/login');
 	};
 
 	const handleOnChange = (event) => {

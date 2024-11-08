@@ -12,21 +12,29 @@ export const LoginForm = () => {
 		password: '',
 	});
 
-	const handleSumbit = (event) => {
+	const handleSumbit = async (event) => {
 		event.preventDefault();
 
-		setLogin((prevState) => {
-			const newState = {
-				...prevState,
-				token: true,
-				id: Math.ceil(Math.random(100 * 1)),
-			};
-			return newState;
+		const newUser = await fetch(`${VITE_API_URL}/api/auth/login`, {
+			method: 'POST',
+			body: JSON.stringify(login),
 		});
 
-		setTimeout(() => {
-			navigate(`/profile`);
-		}, 1000);
+		const response = await newUser.json();
+		console.log(response);
+
+		// setLogin((prevState) => {
+		// 	const newState = {
+		// 		...prevState,
+		// 		token: true,
+		// 		id: Math.ceil(Math.random(100 * 1)),
+		// 	};
+		// 	return newState;
+		// });
+
+		// setTimeout(() => {
+		// 	navigate(`/profile`);
+		// }, 1000);
 	};
 
 	useEffect(() => {
