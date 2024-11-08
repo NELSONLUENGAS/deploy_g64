@@ -6,10 +6,10 @@ const cors = require('cors')
 const app = express();
 
 
-app.use(express.json());
 app.use(cors({
     origin: ['http://localhost:5173', 'https://server-g64.onrender.com'],
 }))
+app.use(express.json());
 
 // Rutas
 app.use('/', routes);

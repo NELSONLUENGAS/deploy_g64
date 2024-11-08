@@ -19,13 +19,16 @@ export const RegisterForm = () => {
 
 		const newUser = await fetch(`${VITE_API_URL}/api/auth/register`, {
 			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
 			body: JSON.stringify(register),
 		});
 
 		const response = await newUser.json();
-		console.log(response);
-		// const newUser = handleSession(register);
-		// navigate('/login');
+
+		handleSession(response);
+		navigate('/login');
 	};
 
 	const handleOnChange = (event) => {

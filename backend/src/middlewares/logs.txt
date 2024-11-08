@@ -377,3 +377,59 @@
             Request Body: {}
 
         
+            2024-11-08T02:44:10.500Z | IP: ::1 | POST /api/auth/register | 
+            Status: 400 | Duration: 91ms
+            User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36
+            Query Params: {}
+            Request Body: {}
+
+        
+            2024-11-08T02:45:40.142Z | IP: ::1 | POST /api/auth/register | 
+            Status: 400 | Duration: 137ms
+            User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36
+            Query Params: {}
+            Request Body: {}
+
+        
+            2024-11-08T02:47:43.500Z | IP: ::1 | POST /api/auth/register | 
+            Status: 201 | Duration: 165ms
+            User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36
+            Query Params: {}
+            Request Body: {"username":"Pepito","email":"pepito1@gmail.com","password":"12345678"}
+
+        
+            2024-11-08T02:49:03.609Z | IP: ::1 | POST /api/auth/login | 
+            Status: 200 | Duration: 152ms
+            User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36
+            Query Params: {}
+            Request Body: {"email":"pepito1@gmail.com","password":"12345678"}
+
+        
+            2024-11-08T02:52:57.990Z | IP: ::1 | POST /api/auth/register | 
+            Status: 201 | Duration: 194ms
+            User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36
+            Query Params: {}
+            Request Body: {"username":"pepito2","email":"PEPITO2@gmail.com","password":"12345678"}
+
+        
+            2024-11-08T02:53:08.852Z | IP: ::1 | POST /api/auth/login | 
+            Status: 404 | Duration: 16ms
+            User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36
+            Query Params: {}
+            Request Body: {"email":"pepito2@gmail.com","password":"12345678"}
+
+        
+            2024-11-08T02:53:35.915Z | IP: ::1 | POST /api/auth/login | 
+            Status: 200 | Duration: 130ms
+            User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36
+            Query Params: {}
+            Request Body: {"email":"PEPITO2@gmail.com","password":"12345678"}
+
+        
+            2024-11-08T02:55:51.963Z | IP: ::1 | POST /api/auth/login | 
+            Status: 200 | Duration: 250ms
+            User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36
+            Query Params: {}
+            Request Body: {"email":"PEPITO2@gmail.com","password":"12345678"}
+
+        

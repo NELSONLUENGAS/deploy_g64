@@ -6,7 +6,7 @@ const authValidators = {
         body('username').notEmpty().withMessage('El nombre de usuario es requerido.'),
         body('email').isEmail().withMessage('El formato del email es inválido.')
             .custom(async (value) => {
-                const existingUser = await User.findUnique({ where: { email: value } });
+                const existingUser = await User.findFirst({ where: { email: value } });
                 if (existingUser) {
                     throw new Error('EMAIL_ALREADY_EXISTS');
                 }
@@ -15,6 +15,7 @@ const authValidators = {
             .isLength({ min: 6 })
             .withMessage('La contraseña debe tener al menos 6 caracteres.'),
         async (req, res, next) => {
+            console.log(req.body)
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { useStorage } from '../hooks/useStorage';
+const { VITE_API_URL } = import.meta.env;
 
 export const LoginForm = () => {
 	const { handleSession } = useAuth();
@@ -17,24 +18,27 @@ export const LoginForm = () => {
 
 		const newUser = await fetch(`${VITE_API_URL}/api/auth/login`, {
 			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
 			body: JSON.stringify(login),
 		});
 
-		const response = await newUser.json();
-		console.log(response);
+		const { token } = await newUser.json();
+		const payload = JSON.parse(atob(token.split('.')[1]));
 
-		// setLogin((prevState) => {
-		// 	const newState = {
-		// 		...prevState,
-		// 		token: true,
-		// 		id: Math.ceil(Math.random(100 * 1)),
-		// 	};
-		// 	return newState;
-		// });
+		setLogin((prevState) => {
+			const newState = {
+				...prevState,
+				token: token,
+				...payload,
+			};
+			return newState;
+		});
 
-		// setTimeout(() => {
-		// 	navigate(`/profile`);
-		// }, 1000);
+		setTimeout(() => {
+			navigate(`/profile`);
+		}, 1000);
 	};
 
 	useEffect(() => {
