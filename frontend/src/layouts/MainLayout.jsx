@@ -41,7 +41,7 @@ export const MainLayout = () => {
 				<div style={logoStyle}>
 					{/* Reemplaza esto con tu logo */}
 					<img
-						src="/path/to/logo.png"
+						src="/logo.png"
 						alt="Logo"
 						style={{ height: 40 }}
 					/>

@@ -1,7 +1,9 @@
 ### Auth Routes
 
 ### Registro de usuario
-POST http://localhost:3000/api/auth/register
+
+# POST http://localhost:3000/api/auth/register
+POST https://server-g64.onrender.com/api/auth/register
 Content-Type: application/json
 
 {
